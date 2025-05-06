@@ -35,6 +35,31 @@ class Solution:
                     maze[r][c]=2 #mark as visited
         return False
 
+        m=len(maze)
+        n=len(maze[0])
+        if start[0]==destination[0] and start[1]==destination[1]: return True
+        dirs=[[0,1],[1,0],[0,-1],[-1,0]]
+
+        def dfs(x,y):
+            #base
+            if [x,y]==destination: return True #if we reach dest, return True
+            if maze[x][y]==2: return False #if this has been visited already return False
+
+            #logic
+            maze[x][y]=2
+            for d in dirs:
+                r=x
+                c=y
+                while 0<=r<m and 0<=c<n and maze[r][c]!=1: #check if r,c is in bound and if not at wall.
+                    r+=d[0]
+                    c+=d[1]
+                #we need to go back, as we'll get to know it's a wall and out of bounds only when we are already at the wall and already out of bounds.
+                r-=d[0] 
+                c-=d[1]
+                if dfs(r,c): return True #call dfs for this child
+            return False #in the end after everything is done, we still havent reached the dest -> return False
+        return dfs(start[0],start[1])
+                
 
 
 
