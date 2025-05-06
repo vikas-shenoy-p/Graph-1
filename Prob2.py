@@ -34,7 +34,8 @@ class Solution:
                     q.append((r,c)) #add to q
                     maze[r][c]=2 #mark as visited
         return False
-
+        #Method 2 - DFS
+        # TC - m*n 
         m=len(maze)
         n=len(maze[0])
         if start[0]==destination[0] and start[1]==destination[1]: return True
